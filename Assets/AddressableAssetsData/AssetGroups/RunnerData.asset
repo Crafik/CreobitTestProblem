@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: RunnerData
+  m_EditorClassIdentifier: 
+  m_GroupName: RunnerData
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b476e4f72a52da1479f86f6df325d314
+  m_SerializeEntries:
+  - m_GUID: ff5d79e13116ce843a6c354af72d2153
+    m_Address: Assets/RunnerData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d714ebeb80b5687429e00515769845a0
+    m_Address: Assets/Scenes/Running.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 074fff9010dda7a4db858211aaf79027, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6fd9eaffb17f9794e9034a7a5aed1624, type: 2}
+    - {fileID: 11400000, guid: 26fc71bb43568304db7b8feb0ab8d8bb, type: 2}
