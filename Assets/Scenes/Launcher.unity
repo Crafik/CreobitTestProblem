@@ -730,7 +730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 461963051}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1008997498}
+        m_TargetAssemblyTypeName: LauncherManagerSingleton, Assembly-CSharp
+        m_MethodName: LoadClicker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &461963051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1409,7 +1421,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 658524372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1008997498}
+        m_TargetAssemblyTypeName: LauncherManagerSingleton, Assembly-CSharp
+        m_MethodName: UnloadClicker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &658524372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,6 +1785,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25945dd49c783d49a5b70c92c74f02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickerLoadButton: {fileID: 461963048}
+  clickerUnloadButton: {fileID: 658524369}
+  clickerPlayButton: {fileID: 656428188}
+  clickerProgressBar: {fileID: 1592246798}
+  runnerLoadButton: {fileID: 1645182145}
+  runnerUnloadButton: {fileID: 595892700}
+  runnerPlayButton: {fileID: 1819846612}
+  runnerProgressBar: {fileID: 252767053}
 --- !u!4 &1008997499
 Transform:
   m_ObjectHideFlags: 0
@@ -1770,7 +1802,7 @@ Transform:
   m_GameObject: {fileID: 1008997497}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.87, y: 0, z: 9.68}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2600,7 +2632,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1645182148}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1008997498}
+        m_TargetAssemblyTypeName: LauncherManagerSingleton, Assembly-CSharp
+        m_MethodName: LoadRunner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1645182148
 MonoBehaviour:
   m_ObjectHideFlags: 0

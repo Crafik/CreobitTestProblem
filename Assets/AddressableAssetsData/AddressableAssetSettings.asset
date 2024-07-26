@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 73747a336be3e3a44a0544e276093908
   m_currentHash:
     serializedVersion: 2
-    Hash: 6423a55f986aa8d25b4b6b8084bb2698
+    Hash: 3ad40c4604b225ff3e5bbc3423940257
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -69,6 +69,46 @@ MonoBehaviour:
         m_Value: ServerData/[BuildTarget]
       - m_Id: 630a56345b95daa4eac2fdee0b42a335
         m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+      - m_Id: a56e30954ad9dd9458e9e9b693245b64
+        m_Value: D:/Unity Projects/CreobitTestProblem/Assets
+      - m_Id: 8d075729de8d55349a54c68e82de81d2
+        m_Value: D:/Unity Projects/CreobitTestProblem/Assets
+    - m_InheritedParent: 
+      m_Id: 2f0eae1baab9d224fb0b48e8f918a237
+      m_ProfileName: Development Profile
+      m_Values:
+      - m_Id: 7390261f0d744a24a8f6786f8f74a403
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: fc22eb110dc23614b890c65c7fad3ccb
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: 2d4bb6c5f2108ae43a5684aec91d71ee
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 4b0827c03adb0ea4aa1b3d06bbb9fd61
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 630a56345b95daa4eac2fdee0b42a335
+        m_Value: https://creobittestproblem:6cc6f2f0-05fe-4718-b25c443a71eb-626f-468d@creobitdata.b-cdn.net/[BuildTarget]
+      - m_Id: a56e30954ad9dd9458e9e9b693245b64
+        m_Value: D:/Unity Projects/CreobitTestProblem/Assets
+      - m_Id: 8d075729de8d55349a54c68e82de81d2
+        m_Value: D:/Unity Projects/CreobitTestProblem/Assets
+    - m_InheritedParent: 
+      m_Id: 196c9ffa4c7b2b049b9d3237a1bb0f99
+      m_ProfileName: DevProfile
+      m_Values:
+      - m_Id: 7390261f0d744a24a8f6786f8f74a403
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: fc22eb110dc23614b890c65c7fad3ccb
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: 2d4bb6c5f2108ae43a5684aec91d71ee
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 4b0827c03adb0ea4aa1b3d06bbb9fd61
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 630a56345b95daa4eac2fdee0b42a335
+        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+      - m_Id: a56e30954ad9dd9458e9e9b693245b64
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 8d075729de8d55349a54c68e82de81d2
+        m_Value: DownloadedData/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 7390261f0d744a24a8f6786f8f74a403
       m_Name: BuildTarget
@@ -85,10 +125,18 @@ MonoBehaviour:
     - m_Id: 630a56345b95daa4eac2fdee0b42a335
       m_Name: Remote.LoadPath
       m_InlineUsage: 0
+    - m_Id: a56e30954ad9dd9458e9e9b693245b64
+      m_Name: RemoteLocal.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 8d075729de8d55349a54c68e82de81d2
+      m_Name: RemoteLocal.LoadPath
+      m_InlineUsage: 0
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
     - default
+    - RunnerData
+    - ClickerData
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 99337ca28e3075243bd30f60eb2dadb9, type: 2}
@@ -102,7 +150,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7fbf9710fae7fdf43a485b70a44e537e, type: 2}
   - {fileID: 11400000, guid: c549e461d4856b44490918774b6419f2, type: 2}
   - {fileID: 11400000, guid: 5fea44a045d9c164daf3659af34c0b87, type: 2}
-  m_ActiveProfileId: 1b572340cf179004794da7752b8c2b6a
+  m_ActiveProfileId: 196c9ffa4c7b2b049b9d3237a1bb0f99
   m_HostingServicesManager:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}

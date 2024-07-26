@@ -20,12 +20,14 @@ MonoBehaviour:
   - m_GUID: 97a480ac392abf2458861f13088a31cc
     m_Address: Assets/ClickerData
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ClickerData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9fc0d4010bbf28b4594072e72b8655ab
     m_Address: Assets/Scenes/Clicker.unity
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ClickerData
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 074fff9010dda7a4db858211aaf79027, type: 2}
