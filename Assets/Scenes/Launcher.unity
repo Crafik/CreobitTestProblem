@@ -1734,11 +1734,11 @@ MonoBehaviour:
   clickerLoadButton: {fileID: 461963048}
   clickerUnloadButton: {fileID: 658524369}
   clickerPlayButton: {fileID: 656428188}
-  clickerProgressBar: {fileID: 1270923728}
+  clickerStatusBar: {fileID: 1270923728}
   runnerLoadButton: {fileID: 1645182145}
   runnerUnloadButton: {fileID: 595892700}
   runnerPlayButton: {fileID: 1819846612}
-  runnerProgressBar: {fileID: 282618005}
+  runnerStatusBar: {fileID: 282618005}
 --- !u!4 &1008997499
 Transform:
   m_ObjectHideFlags: 0

@@ -30,10 +30,11 @@ public class LauncherManagerSingleton : MonoBehaviour
     private Slider clickerSlider;
     private Slider runnerSlider;
 
+    // not the best solution, but will do for now
     private readonly string clickerDataFilename = "clickerdata_assets_all_079b52499c1517cc9843cbbe9fa82af5.bundle";
-    private readonly string clickerSceneFilename = "clickerdata_scenes_all_00a3d141c3b09b0c97c232812d6473f4.bundle";
+    private readonly string clickerSceneFilename = "clickerdata_scenes_all_fb6f6d6f9c0a9cc0ae35763afd2f3a41.bundle";
     private readonly string runnerDataFilename = "runnerdata_assets_all_7d01ea8d0d2e6b9e6eef3c539fa4b2bf.bundle";
-    private readonly string runnerSceneFilename = "runnerdata_scenes_all_27cf44a746927d26624a986b7b450b44.bundle";
+    private readonly string runnerSceneFilename = "runnerdata_scenes_all_107e6492109e50364dc3397f4f8af202.bundle";
     private readonly string savePath = Path.Combine("DownloadedData", "StandaloneWindows64");
 
     void Awake(){
