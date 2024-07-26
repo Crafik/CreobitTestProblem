@@ -1,13 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LauncherManagerSingleton : MonoBehaviour
@@ -19,14 +15,14 @@ public class LauncherManagerSingleton : MonoBehaviour
     [SerializeField] private GameObject clickerLoadButton;
     [SerializeField] private GameObject clickerUnloadButton;
     [SerializeField] private GameObject clickerPlayButton;
-    [SerializeField] private GameObject clickerProgressBar;
+    [SerializeField] private GameObject clickerStatusBar;
 
     [Space (5)]
     [Header (" === Runner === ")]
     [SerializeField] private GameObject runnerLoadButton;
     [SerializeField] private GameObject runnerUnloadButton;
     [SerializeField] private GameObject runnerPlayButton;
-    [SerializeField] private GameObject runnerProgressBar;
+    [SerializeField] private GameObject runnerStatusBar;
 
     private GameObject[] clickerObjects;
     private GameObject[] runnerObjects;
@@ -34,12 +30,11 @@ public class LauncherManagerSingleton : MonoBehaviour
     private Slider clickerSlider;
     private Slider runnerSlider;
 
-    private const string clickerDataFilename = "clickerdata_assets_all_079b52499c1517cc9843cbbe9fa82af5.bundle";
-    private const string clickerSceneFilename = "clickerdata_scenes_all_00a3d141c3b09b0c97c232812d6473f4.bundle";
-    private const string runnerDataFilename = "runnerdata_assets_all_7d01ea8d0d2e6b9e6eef3c539fa4b2bf.bundle";
-    private const string runnerSceneFilename = "runnerdata_scenes_all_27cf44a746927d26624a986b7b450b44.bundle";
-    private string savePath = Path.Combine("DownloadedData", "StandaloneWindows64");
-    private AsyncOperationHandle asyncOperationHandle;
+    private readonly string clickerDataFilename = "clickerdata_assets_all_079b52499c1517cc9843cbbe9fa82af5.bundle";
+    private readonly string clickerSceneFilename = "clickerdata_scenes_all_00a3d141c3b09b0c97c232812d6473f4.bundle";
+    private readonly string runnerDataFilename = "runnerdata_assets_all_7d01ea8d0d2e6b9e6eef3c539fa4b2bf.bundle";
+    private readonly string runnerSceneFilename = "runnerdata_scenes_all_27cf44a746927d26624a986b7b450b44.bundle";
+    private readonly string savePath = Path.Combine("DownloadedData", "StandaloneWindows64");
 
     void Awake(){
         if (instance != null && instance != this){
@@ -53,29 +48,37 @@ public class LauncherManagerSingleton : MonoBehaviour
             clickerLoadButton,
             clickerUnloadButton,
             clickerPlayButton,
-            clickerProgressBar
+            clickerStatusBar
         };
         runnerObjects = new GameObject[]{
             runnerLoadButton,
             runnerUnloadButton,
             runnerPlayButton,
-            runnerProgressBar
+            runnerStatusBar
         };
-
-        for (int i = 1; i < 3; ++i){
-            clickerObjects[i].GetComponent<Button>().interactable = false;
-            runnerObjects[i].GetComponent<Button>().interactable = false;
-        }
-        clickerObjects[3].SetActive(false);
-        clickerSlider = clickerObjects[3].GetComponent<Slider>();
-        clickerSlider.interactable = false;
-        runnerObjects[3].SetActive(false);
-        runnerSlider = runnerObjects[3].GetComponent<Slider>();
-        runnerSlider.interactable = false;
     }
 
     void Start(){
         // here check if files is already present
+        bool existsFlag = true;
+        foreach (string name in new string[]{clickerDataFilename, clickerSceneFilename}){
+            if (!File.Exists(Path.Combine(savePath, name))){
+                existsFlag = false;
+                UnloadAssets(true);
+                break;
+            }
+        }
+        SetGameLoaded(true, existsFlag);
+
+        existsFlag = true;
+        foreach (string name in new string[]{runnerDataFilename, runnerSceneFilename}){
+            if (!File.Exists(Path.Combine(savePath, name))){
+                existsFlag = false;
+                UnloadAssets(false);
+                break;
+            }
+        }
+        SetGameLoaded(false, existsFlag);
     }
 
     private void LoadAssets(bool isClicker){
@@ -83,16 +86,13 @@ public class LauncherManagerSingleton : MonoBehaviour
         GameObject loadbutton = isClicker ? clickerObjects[0] : runnerObjects[0];
         loadbutton.GetComponent<Button>().interactable = false;
 
+        (isClicker ? clickerObjects[3] : runnerObjects[3]).SetActive(true);
+
         string[] filenames = isClicker ?
             new string[]{clickerDataFilename, clickerSceneFilename}:
             new string[]{runnerDataFilename, runnerSceneFilename};
         StartCoroutine(FTPConnection(filenames, isClicker));
 
-
-        // !!! IMPORTANT !!!
-        // finish the logic here and then commit
-        // message should probably be like:
-        // "built remote assets, added loading logic, updated .gitignore"
     }
 
     private IEnumerator FTPConnection(string[] filenames, bool isClicker){
@@ -108,12 +108,8 @@ public class LauncherManagerSingleton : MonoBehaviour
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success){
-                Debug.LogError($"Error connecting to FTP: {request.error}");
                 successFlag = false;
                 break;
-            }
-            else{
-                Debug.Log("FTP connection successful");
             }
             request.Dispose();
         }
@@ -129,8 +125,7 @@ public class LauncherManagerSingleton : MonoBehaviour
 
     private void LoadComplete(bool isClicker){
         GameObject[] objects = isClicker ? clickerObjects : runnerObjects;
-        objects[1].GetComponent<Button>().interactable = true;
-        objects[2].GetComponent<Button>().interactable = true;
+        SetGameLoaded(isClicker, true);
     }
 
     private void UnloadAssets(bool isClicker){
@@ -143,6 +138,15 @@ public class LauncherManagerSingleton : MonoBehaviour
                 File.Delete(filepath);
             }
         }
+        SetGameLoaded(isClicker, false);
+    }
+
+    private void SetGameLoaded(bool isClicker, bool isLoaded){
+        GameObject[] objects = isClicker ? clickerObjects : runnerObjects;
+        objects[0].GetComponent<Button>().interactable = !isLoaded;
+        objects[1].GetComponent<Button>().interactable = isLoaded;
+        objects[2].GetComponent<Button>().interactable = isLoaded;
+        objects[3].SetActive(false);
     }
 
     public void LoadClicker(){
@@ -158,21 +162,14 @@ public class LauncherManagerSingleton : MonoBehaviour
     }
 
     public void LoadRunner(){
-        // here be code
-        Debug.Log(Addressables.RuntimePath);
+        LoadAssets(false);
     }
 
     public void UnloadRunner(){
-
+        UnloadAssets(false);
     }
 
     public void PlayRunner(){
-        SceneManager.LoadScene(2);
-    }
-
-    void Update(){
-        // if (clickerProgressBar.gameObject.activeSelf){
-        //     clickerProgressBar.value = asyncOperationHandle.PercentComplete;
-        // }
+        Addressables.LoadSceneAsync("RunnerData");
     }
 }
