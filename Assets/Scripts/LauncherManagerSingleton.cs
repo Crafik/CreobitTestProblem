@@ -35,6 +35,9 @@ public class LauncherManagerSingleton : MonoBehaviour
     private readonly string clickerSceneFilename = "clickerdata_scenes_all_fb6f6d6f9c0a9cc0ae35763afd2f3a41.bundle";
     private readonly string runnerDataFilename = "runnerdata_assets_all_7d01ea8d0d2e6b9e6eef3c539fa4b2bf.bundle";
     private readonly string runnerSceneFilename = "runnerdata_scenes_all_107e6492109e50364dc3397f4f8af202.bundle";
+
+    private readonly string clickerAssetsNamemask = "clickerdata_*.bundle";
+    private readonly string runnerAssetsNamemask = "runnerdata_*.bundle";
     private readonly string savePath = Path.Combine("DownloadedData", "StandaloneWindows64");
 
     void Awake(){
@@ -87,19 +90,29 @@ public class LauncherManagerSingleton : MonoBehaviour
         GameObject loadbutton = isClicker ? clickerObjects[0] : runnerObjects[0];
         loadbutton.GetComponent<Button>().interactable = false;
 
-        (isClicker ? clickerObjects[3] : runnerObjects[3]).SetActive(true);
+        // (isClicker ? clickerObjects[3] : runnerObjects[3]).SetActive(true);
 
-        string[] filenames = isClicker ?
-            new string[]{clickerDataFilename, clickerSceneFilename}:
-            new string[]{runnerDataFilename, runnerSceneFilename};
-        StartCoroutine(FTPConnection(filenames, isClicker));
+        // string[] filenames = isClicker ?
+        //     new string[]{clickerDataFilename, clickerSceneFilename}:
+        //     new string[]{runnerDataFilename, runnerSceneFilename};
+        // StartCoroutine(FTPConnection(filenames, isClicker));
+
+        if (TryCopyFiles(isClicker ? clickerAssetsNamemask : runnerAssetsNamemask)){
+            SetGameLoaded(isClicker, true);
+        }
+        else{
+            UnloadAssets(isClicker);
+        }
 
     }
 
+    // obsolete, deprecated, discontinued and not working now
+    // because ftp server is not available, "loading" logic was remade to simple copy from neighbouring folder
+    // =(
+    #region """legacy""" code
     private IEnumerator FTPConnection(string[] filenames, bool isClicker){
-
         UnityWebRequest request;
-        string URL = "https://creobitdata567849549892159.b-cdn.net/StandaloneWindows64/";
+        string URL = Path.Combine("ServerData", "StandaloneWindows64"); // here was url to server, but server is no more
 
         bool successFlag = true;
 
@@ -128,16 +141,33 @@ public class LauncherManagerSingleton : MonoBehaviour
         GameObject[] objects = isClicker ? clickerObjects : runnerObjects;
         SetGameLoaded(isClicker, true);
     }
+    #endregion
+
+    private bool TryCopyFiles(string url){
+        DirectoryInfo dir = new DirectoryInfo(Path.Combine("ServerData", "StandaloneWindows64"));
+        var files = dir.GetFiles(url);
+        if (files.Length == 2){
+            File.Copy(files[0].FullName, Path.Combine(savePath, files[0].Name));
+            File.Copy(files[1].FullName, Path.Combine(savePath, files[1].Name));
+            return true;
+        }
+        return false;
+    }
 
     private void UnloadAssets(bool isClicker){
-        string[] filenames = isClicker ?
-            new string[]{clickerDataFilename, clickerSceneFilename}:
-            new string[]{runnerDataFilename, runnerSceneFilename};
-        foreach(string name in filenames){
-            string filepath = Path.Combine(savePath, name);
-            if (File.Exists(filepath)){
-                File.Delete(filepath);
-            }
+        // string[] filenames = isClicker ?
+        //     new string[]{clickerDataFilename, clickerSceneFilename}:
+        //     new string[]{runnerDataFilename, runnerSceneFilename};
+        // foreach(string name in filenames){
+        //     string filepath = Path.Combine(savePath, name);
+        //     if (File.Exists(filepath)){
+        //         File.Delete(filepath);
+        //     }
+        // }
+
+        DirectoryInfo dir = new DirectoryInfo(savePath);
+        foreach (var v_file in dir.GetFiles(isClicker ? clickerAssetsNamemask : runnerAssetsNamemask)){
+            File.Delete(v_file.FullName);
         }
         SetGameLoaded(isClicker, false);
     }

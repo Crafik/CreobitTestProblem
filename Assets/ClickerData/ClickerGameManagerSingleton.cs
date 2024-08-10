@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class ClickerGameManagerSingleton : MonoBehaviour
     }
 
     void Start(){
-        m_DataHandler = new SaveDataHandler(Application.persistentDataPath, "clicker.savedata");
+        m_DataHandler = new SaveDataHandler(Path.Combine("Savedata", "Clicker"), "clicker.savedata");
         string saveData = m_DataHandler.Load();
         if (saveData.Length > 0){
             SetCoins(int.Parse(saveData));

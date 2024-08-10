@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,7 +47,7 @@ public class RunnerGameManagerSingleton : MonoBehaviour
         isStarted = false;
         
         m_controls = new Controls();
-        dataHandler = new SaveDataHandler(Application.persistentDataPath, "runner.savedata");
+        dataHandler = new SaveDataHandler(Path.Combine("Savedata", "Runner"), "runner.savedata");
         string saveData = dataHandler.Load();
         if (saveData.Length > 0){
             if(!float.TryParse(saveData, out bestTime)){
